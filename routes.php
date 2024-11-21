@@ -7,7 +7,7 @@ require_once 'app/controllers/organizers_controller.php';
 require_once 'app/controllers/PesertaController.php';
 require_once 'app/controllers/tiketcontroller.php';
 
-
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'events';
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 

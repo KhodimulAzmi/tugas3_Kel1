@@ -1,6 +1,6 @@
 <?php
 // app/models/EventsModel.php
-require_once 'C:/laragon/www/TUGAS3_EVENTS/config/database.php';
+require_once '../config/database.php';
 
 class EventsModel {
     private $db;

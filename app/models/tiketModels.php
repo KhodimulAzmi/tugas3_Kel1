@@ -1,6 +1,6 @@
 <?php
 // app/models/User.php
-require_once 'C:/laragon/www/PWEB2/tugas3_Kel1/config/database.php';
+require_once '../config/database.php';
 
 class ticketModel {
     private $db;

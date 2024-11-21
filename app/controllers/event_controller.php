@@ -1,6 +1,6 @@
 <?php
 // app/controllers/EventController.php
-require_once 'C:/laragon/www/TUGAS3_EVENTS/app/models/EventsModel.php';
+require_once '../app/models/events_model.php';
 
 class EventController {
     private $EventsModel;
@@ -13,12 +13,12 @@ class EventController {
     public function index() {
         $EventController = $this->EventsModel->getAllEvents(); 
         // Mengambil semua data acara
-        require_once 'C:/laragon/www/TUGAS3_EVENTS/app/views/event/index.php';
+        require_once '../app/views/event/index.php';
     }
 
     // Menampilkan form untuk menambah acara baru
     public function create() {
-        require_once 'C:/laragon/www/TUGAS3_EVENTS/app/views/event/create.php';
+        require_once '../app/views/event/create.php';
     }
 
     // Menyimpan acara baru ke database
