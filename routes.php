@@ -7,16 +7,19 @@ require_once 'app/controllers/organizers_controller.php';
 require_once 'app/controllers/PesertaController.php';
 require_once 'app/controllers/tiketcontroller.php';
 require_once 'app/controllers/home_controller.php';
+require_once 'app/controllers/template_controller.php';
 
 $events = new EventController();
 $organizers = new OrganizersController();
 $peserta = new AttendeesController();
 $tickets = new TicketController();
 $home = new HomeController();
+$template = new TemplateController();
 
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+$template->header();
 
         if ($url == '/'){
             $home->index();
@@ -84,4 +87,6 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
             http_response_code(404);
             echo "<h1>404 Not Found</h1>";
         }
+
+$template->footer();
 
