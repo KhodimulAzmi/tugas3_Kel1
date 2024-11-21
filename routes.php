@@ -1,28 +1,51 @@
 <?php
+
 // routes.php
 
 require_once 'app/controllers/organizers_controller.php';
 
-$controller = new OrganizersController();
+$organizers = new OrganizersController();
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-if ($url == '/organizers/index' || $url == '/') {
-    $controller->index();
+switch ($controller) {
+    case 'events':
+        $eventsController = new EventsController();
+
+        break;
+
+    case 'organizers':
+        $organizersController = new OrganizersController();
+       if ($url == '/organizers/index' || $url == '/') {
+    $organizers->index();
 } elseif ($url == '/organizers/create' && $requestMethod == 'GET') {
-    $controller->create();
+    $organizers->create();
 } elseif ($url == '/organizers/store' && $requestMethod == 'POST') {
-    $controller->store();
+    $organizers->store();
 } elseif (preg_match('/\/organizers\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
     $organizersId = $matches[1];
-    $controller->edit($organizersId);
+    $organizers->edit($organizersId);
 } elseif (preg_match('/\/organizers\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
     $organizersId = $matches[1];
-    $controller->update($organizersId, $_POST);
+    $organizers->update($organizersId, $_POST);
 } elseif (preg_match('/\/organizers\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
     $organizersId = $matches[1];
-    $controller->delete($organizersId);
+    $organizers->delete($organizersId);
 } else {
     http_response_code(404);
     echo "404 Not Found";
+}
+        break;
+
+    case 'attendees':
+        $attendeesControle = new AttendeesController();
+
+        break;
+    case 'tickets':
+        $ticketsControle = new TicketsController();
+
+        break;
+    default:
+        echo "Controller tidak ditemukan!";
+        exit;
 }
