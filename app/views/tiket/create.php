@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Tambah Tiket</h1>
-    <form action="/tugas3_Kel1/tiket/store" method="POST">
+    <form action="/tiket/store" method="POST">
         <label for="id_tiket">ID Tiket :</label><br>
         <input type="number" id="id_tiket" name="id_tiket" required><br><br>
 
@@ -31,7 +31,7 @@
         <button type="submit">Simpan Tiket</button>
     </form>
     <br>
-    <a href="/tugas3_Kel1/tiket/index">Kembali ke Daftar Tiket</a>
+    <a href="/tiket/index">Kembali ke Daftar Tiket</a>
 </body>
 </html>
 

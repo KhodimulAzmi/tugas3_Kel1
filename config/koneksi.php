@@ -2,9 +2,9 @@
 
 class Database {
 
-    private $host = "160.19.166.42";
-    private $username = "2D_klp1";
-    private $password = "QCA5RkQG0oMSe*XW";
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
     private $db = "2D_klp1";
     private $conn;
 

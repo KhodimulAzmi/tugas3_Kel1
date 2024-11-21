@@ -6,105 +6,82 @@ require_once 'app/controllers/event_controller.php';
 require_once 'app/controllers/organizers_controller.php';
 require_once 'app/controllers/PesertaController.php';
 require_once 'app/controllers/tiketcontroller.php';
+require_once 'app/controllers/home_controller.php';
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'events';
+$events = new EventController();
+$organizers = new OrganizersController();
+$peserta = new AttendeesController();
+$tickets = new TicketController();
+$home = new HomeController();
+
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-switch ($controller) {
-    case 'events':
-        $controller = new EventController();
-        if ($url == '/event/index' || $url == '/') {
-            $controller->index();
+
+        if ($url == '/'){
+            $home->index();
+        }elseif ($url == '/event/index') {
+            $events->index();
         } elseif ($url == '/event/create' && $requestMethod == 'GET') {
-            $controller->create();
+            $events->create();
         } elseif ($url == '/event/store' && $requestMethod == 'POST') {
-            $controller->store();
+            $events->store();
         } elseif (preg_match('/\/event\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $eventsId = $matches[1];
-            $controller->edit($organizersId);
+            $events->edit($eventsId);
         } elseif (preg_match('/\/event\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
             $eventsId = $matches[1];
-            $controller->update($eventsId, $_POST);
+            $events->update($eventsId, $_POST);
         } elseif (preg_match('/\/event\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $eventsId = $matches[1];
-            $controller->delete($eventsId);
-        } else {
-            http_response_code(404);
-            echo "404 Not Found";
-        }
-        break;
-
-    case 'organizers':
-        $controller = new OrganizersController();
-        if ($url == '/organizers/index' || $url == '/') {
-            $controller->index();
+            $events->delete($eventsId);
+        } elseif ($url == '/organizers/index') {
+            $organizers->index();
         } elseif ($url == '/organizers/create' && $requestMethod == 'GET') {
-            $controller->create();
+            $organizers->create();
         } elseif ($url == '/organizers/store' && $requestMethod == 'POST') {
-            $controller->store();
+            $organizers->store();
         } elseif (preg_match('/\/organizers\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $organizersId = $matches[1];
-            $controller->edit($organizersId);
+            $organizers->edit($organizersId);
         } elseif (preg_match('/\/organizers\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
             $organizersId = $matches[1];
-            $controller->update($organizersId, $_POST);
+            $organizers->update($organizersId, $_POST);
         } elseif (preg_match('/\/organizers\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $organizersId = $matches[1];
-            $controller->delete($organizersId);
-        } else {
-            http_response_code(404);
-            echo "404 Not Found";
-        }
-        break;
-
-    case 'attendees':
-        $controller = new AttendeesController();
-        if ($url == '/peserta/index' || $url == '/') {
-            $controller->index();
+            $organizers->delete($organizersId);
+        }elseif ($url == '/peserta/index') {
+            $peserta->index();
         } elseif ($url == '/peserta/create' && $requestMethod == 'GET') {
-            $controller->create();
+            $peserta->create();
         } elseif ($url == '/peserta/store' && $requestMethod == 'POST') {
-            $controller->store();
+            $peserta->store();
         } elseif (preg_match('/\/peserta\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $userId = $matches[1];
-            $controller->edit($userId);
+            $peserta->edit($userId);
         } elseif (preg_match('/\/peserta\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
             $userId = $matches[1];
-            $controller->update($userId, $_POST);
+            $peserta->update($userId, $_POST);
         } elseif (preg_match('/\/peserta\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $userId = $matches[1];
-            $controller->delete($userId);
-        } else {
-            http_response_code(404);
-            echo "404 Not Found";
-        }
-        break;
-
-    case 'tickets':
-        $controller = new TicketController();
-        if ($url == 'tiket/index') {
-            $controller->index();
-        } elseif ($url == 'tiket/create') {
-            $controller->create();
-        } elseif ($url == 'tiket/store') {
-            $controller->store();
-        } elseif (preg_match('/^tiket\/edit\/(\d+)$/', $url, $matches)) {
+            $peserta->delete($userId);
+        }elseif ($url == '/tiket/index') {
+            $tickets->index();
+        } elseif ($url == '/tiket/create') {
+            $tickets->create();
+        } elseif ($url == '/tiket/store') {
+            $tickets->store();
+        } elseif (preg_match('/\/tiket\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $id_tiket = $matches[1];
-            $controller->edit($id_tiket);
-        } elseif (preg_match('/^tiket\/update\/(\d+)$/', $url, $matches) && $requestMethod == 'POST') {
+            $tickets->edit($id_tiket);
+        } elseif (preg_match('/\/tiket\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
             $id_tiket = $matches[1];
-            $controller->update($id_tiket, $_POST);
-        } elseif (preg_match('/^tiket\/delete\/(\d+)$/', $url, $matches) && $requestMethod == 'GET') {
+            $tickets->update($id_tiket, $_POST);
+        } elseif (preg_match('/\/tiket\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
             $id_tiket = $matches[1];
-            $controller->delete($id_tiket);
+            $tickets->delete($id_tiket);
         } else {
             http_response_code(404);
             echo "<h1>404 Not Found</h1>";
         }
-        break;
-        
-    default:
-        echo "Controller tidak ditemukan!";
-        exit;
-}
+
