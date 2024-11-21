@@ -7,7 +7,6 @@ require_once 'app/controllers/PesertaController.php';
 require_once 'app/controllers/tiketcontroller.php';
 
 
-
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
