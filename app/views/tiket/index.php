@@ -1,7 +1,7 @@
 <!-- app/views/user/index.php -->
 
 <h2>Tiket</h2>
-<a href="/tugas3_Kel1/tiket/create">Tambah Tiket</a>
+<a href="/tiket/create">Tambah Tiket</a>
     <table border= "1">
         <tr>
             <th>Id Tiket</th>
@@ -20,8 +20,8 @@
 				<td><?php echo $tiket['harga']; ?></td>
 				<td><?php echo $tiket['kuota']; ?></td>
 				<td><?php echo $tiket['id_events']; ?></td>
-				<td><a href="/tugas3_Kel1/tiket/edit/<?php echo $tiket['id_tiket']; ?>">EDIT</a></td>
-				<td><a href="/tugas3_Kel1/tiket/delete/<?php echo $tiket['id_tiket']; ?>">Delete</a></td>
+				<td><a href="/tiket/edit/<?php echo $tiket['id_tiket']; ?>">EDIT</a></td>
+				<td><a href="/tiket/delete/<?php echo $tiket['id_tiket']; ?>">Delete</a></td>
 		</tr>
 		<?php } ?>
     </table>

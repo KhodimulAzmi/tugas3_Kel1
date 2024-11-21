@@ -1,7 +1,7 @@
 <?php
 // app/controllers/UserController.php
 
-require_once 'C:/laragon/www/PWEB2/tugas3_Kel1/app/models/tiketModels.php';
+require_once '../app/models/tiketModels.php';
 
 class TicketController {
     private $ticketModel;
@@ -12,12 +12,12 @@ class TicketController {
 
     public function index() {
         $ticketData = $this->ticketModel->getAllTickets();
-        require_once 'C:/laragon/www/PWEB2/tugas3_Kel1/app/views/tiket/index.php';
+        require_once '../app/views/tiket/index.php';
 
     }
 
     public function create() {
-        require_once 'C:/laragon/www/PWEB2/tugas3_Kel1/app/views/tiket/create.php';
+        require_once '../app/views/tiket/create.php';
     }
 
     public function store() {
@@ -27,19 +27,19 @@ class TicketController {
         $kuota = $_POST['kuota'];
         $id_events = $_POST['id_events'];
         $this->ticketModel->add($id, $jenis, $harga, $kuota, $id_events);
-        header('Location: /tugas3_Kel1/tiket/index');
+        header('Location: /tiket/index');
     }
     // Show the edit form with the user data
     public function edit($id_tiket) {
         $tiket = $this->ticketModel->find($id_tiket); // Assume find() gets user by ID
-        require_once 'C:/laragon/www/PWEB2/tugas3_Kel1/app/views/tiket/edit.php';
+        require_once '../app/views/tiket/edit.php';
     }
 
     // Process the update request
     public function update($id, $data) {
         $updated = $this->ticketModel->update($id, $data);
         if ($updated) {
-            header("Location: /Tugas3-ticket/tiket/index"); // Redirect to user list
+            header("Location: /tiket/index"); // Redirect to user list
         } else {
             echo "Failed to update ticket.";
         }
@@ -50,7 +50,7 @@ class TicketController {
 
         $deleted = $this->ticketModel->delete($id_tiket);
         if ($deleted) {
-            header("Location: /tugas3_Kel1/tiket/index"); // Redirect to user list
+            header("Location: /tiket/index"); // Redirect to user list
         } else {
             echo "Failed to delete user.";
         }

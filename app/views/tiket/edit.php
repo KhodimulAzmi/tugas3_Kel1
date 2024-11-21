@@ -11,7 +11,7 @@
     <h2>Edit Tiket</h2>
 
     <?php if (isset($id_tiket)): ?>
-    <form action="/tugas3_Kel1/tiket/update/<?php echo $tiket['id_tiket']; ?>" method="POST">
+    <form action="/tiket/update/<?php echo $tiket['id_tiket']; ?>" method="POST">
         <table>
             <tr>
                 <td><label for="id_tiket">ID Tiket:</label></td>
