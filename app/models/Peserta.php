@@ -1,6 +1,6 @@
 <?php
 // app/models/Peserta.php
-require_once "../config/koneksi.php";
+require_once "../config/database.php";
 
 class Peserta {
     private $db;

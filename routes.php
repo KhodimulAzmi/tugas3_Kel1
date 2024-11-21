@@ -3,7 +3,7 @@
 // routes.php
 
 require_once 'app/controllers/organizers_controller.php';
-require_once 'app/controller/PesertaController.php';
+require_once 'app/controllers/PesertaController.php';
 
 $peserta = new AttendeesController();
 $organizers = new OrganizersController();
