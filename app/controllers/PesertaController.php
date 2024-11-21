@@ -1,5 +1,5 @@
 <?php
-require_once '../app/model/Peserta.php';
+require_once '../app/models/Peserta.php';
 
 class AttendeesController
 {
