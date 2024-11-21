@@ -2,6 +2,7 @@
 
 // routes.php
 
+require_once 'app/controllers/event_controller.php';
 require_once 'app/controllers/organizers_controller.php';
 require_once 'app/controllers/PesertaController.php';
 require_once 'app/controllers/tiketcontroller.php';
@@ -12,8 +13,26 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 switch ($controller) {
     case 'events':
-        $eventsController = new EventsController();
-
+        $controller = new EventController();
+        if ($url == '/event/index' || $url == '/') {
+            $controller->index();
+        } elseif ($url == '/event/create' && $requestMethod == 'GET') {
+            $controller->create();
+        } elseif ($url == '/event/store' && $requestMethod == 'POST') {
+            $controller->store();
+        } elseif (preg_match('/\/event\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
+            $eventsId = $matches[1];
+            $controller->edit($organizersId);
+        } elseif (preg_match('/\/event\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
+            $eventsId = $matches[1];
+            $controller->update($eventsId, $_POST);
+        } elseif (preg_match('/\/event\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
+            $eventsId = $matches[1];
+            $controller->delete($eventsId);
+        } else {
+            http_response_code(404);
+            echo "404 Not Found";
+        }
         break;
 
     case 'organizers':
@@ -60,8 +79,8 @@ switch ($controller) {
             http_response_code(404);
             echo "404 Not Found";
         }
-
         break;
+
     case 'tickets':
         $controller = new TicketController();
         if ($url == 'tiket/index') {
@@ -84,6 +103,7 @@ switch ($controller) {
             echo "<h1>404 Not Found</h1>";
         }
         break;
+        
     default:
         echo "Controller tidak ditemukan!";
         exit;
