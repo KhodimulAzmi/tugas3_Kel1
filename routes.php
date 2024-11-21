@@ -3,8 +3,11 @@
 // routes.php
 
 require_once 'app/controllers/organizers_controller.php';
+require_once 'app/controller/PesertaController.php';
 
+$peserta = new AttendeesController();
 $organizers = new OrganizersController();
+
 $url = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -15,7 +18,6 @@ switch ($controller) {
         break;
 
     case 'organizers':
-        $organizersController = new OrganizersController();
        if ($url == '/organizers/index' || $url == '/') {
     $organizers->index();
 } elseif ($url == '/organizers/create' && $requestMethod == 'GET') {
@@ -38,7 +40,25 @@ switch ($controller) {
         break;
 
     case 'attendees':
-        $attendeesControle = new AttendeesController();
+    if ($url == '/peserta/index' || $url == '/') {
+    $peserta->index();
+} elseif ($url == '/peserta/create' && $requestMethod == 'GET') {
+    $peserta->create();
+} elseif ($url == '/peserta/store' && $requestMethod == 'POST') {
+    $peserta->store();
+} elseif (preg_match('/\/peserta\/edit\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
+    $userId = $matches[1];
+    $peserta->edit($userId);
+} elseif (preg_match('/\/peserta\/update\/(\d+)/', $url, $matches) && $requestMethod == 'POST') {
+    $userId = $matches[1];
+    $peserta->update($userId, $_POST);
+} elseif (preg_match('/\/peserta\/delete\/(\d+)/', $url, $matches) && $requestMethod == 'GET') {
+    $userId = $matches[1];
+    $peserta->delete($userId);
+} else {
+    http_response_code(404);
+    echo "404 Not Found";
+}
 
         break;
     case 'tickets':
@@ -49,3 +69,4 @@ switch ($controller) {
         echo "Controller tidak ditemukan!";
         exit;
 }
+
