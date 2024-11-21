@@ -1,7 +1,0 @@
-Options +FollowSymlinks
-RewriteEngine On
-
-# Redirect all requests to routes.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ routes.php?url=$1 [L,QSA]
