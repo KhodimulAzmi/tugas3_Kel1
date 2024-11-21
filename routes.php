@@ -4,6 +4,7 @@
 
 require_once 'app/controllers/organizers_controller.php';
 require_once 'app/controllers/PesertaController.php';
+require_once 'app/controllers/tiketcontroller.php';
 
 $peserta = new AttendeesController();
 $organizers = new OrganizersController();
@@ -62,10 +63,29 @@ switch ($controller) {
 
         break;
     case 'tickets':
-        $ticketsControle = new TicketsController();
-
+        $controller = new TicketController();
+        if ($url == 'tiket/index') {
+    $controller->index();
+} elseif ($url == 'tiket/create') {
+    $controller->create();
+} elseif ($url == 'tiket/store') {
+    $controller->store();
+} elseif (preg_match('/^tiket\/edit\/(\d+)$/', $url, $matches)) {
+    $id_tiket = $matches[1];
+    $controller->edit($id_tiket);
+} elseif (preg_match('/^tiket\/update\/(\d+)$/', $url, $matches) && $requestMethod == 'POST') {
+    $id_tiket = $matches[1];
+    $controller->update($id_tiket, $_POST);
+} elseif (preg_match('/^tiket\/delete\/(\d+)$/', $url, $matches) && $requestMethod == 'GET') {
+    $id_tiket = $matches[1];
+    $controller->delete($id_tiket);
+} else {
+    http_response_code(404);
+    echo "<h1>404 Not Found</h1>";
+}
         break;
     default:
         echo "Controller tidak ditemukan!";
         exit;
 }
+
