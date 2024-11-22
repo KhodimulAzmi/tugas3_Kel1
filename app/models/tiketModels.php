@@ -2,7 +2,7 @@
 // app/models/User.php
 require_once '../config/database.php';
 
-class ticketModel {
+class TicketModel {
     private $db;
 
     public function __construct() {
@@ -10,7 +10,7 @@ class ticketModel {
     }
 
     public function getAllTickets() {
-        $query = $this->db->prepare("SELECT * FROM tickets");
+        $query = $this->db->prepare("SELECT t.id_tiket, t.jenis_tiket, t.harga, t.kuota, e.nama_acara FROM tickets t JOIN events e ON t.id_events = e.id_events");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
