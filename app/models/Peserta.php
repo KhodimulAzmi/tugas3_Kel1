@@ -10,7 +10,7 @@ class Peserta {
     }
 
     public function getAllPeserta() {
-        $query = $this->db->query("SELECT * FROM attendees");
+        $query = $this->db->query("SELECT p.id_att, p.nama, p.email, p.no_tlp, t.id_tiket  FROM attendees p join tickets t on p.id_tiket = t.id_tiket  ");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
