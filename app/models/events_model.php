@@ -10,7 +10,7 @@ class EventsModel {
     }
 
     public function getAllEvents() {
-        $query = $this->db->query("SELECT * FROM events");
+        $query = $this->db->query("SELECT e.id_events, e.nama_acara, e.deskripsi, e.tanggal, e.waktu, e.lokasi, o.nama from events e join organizers o on o.id_org = e.id_org");
         $query->execute(); 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

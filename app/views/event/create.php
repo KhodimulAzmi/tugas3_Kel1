@@ -1,36 +1,88 @@
-<!-- app/views/event/create.php -->
-<!-- app/views/event/create.php -->
-<h2>Tambah Acara Baru</h2>
-<form action="/event/store" method="POST" style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
-    <div style="margin-bottom: 15px;">
-        <label for="nama_acara" style="display: block; font-weight: bold;">Nama Acara:</label>
-        <input type="text" name="nama_acara" id="nama_acara" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Event Baru</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap & CSS -->
+    <link rel="stylesheet" href="/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/public/assets/css/main.css" rel="stylesheet">
+    <link href="/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/public/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/public/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/public/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="text-center">
+        <div class="container">
+            <h1 class="mb-4">Tambah Event Baru</h1>
+        </div>
     </div>
 
-    <div style="margin-bottom: 15px;">
-        <label for="deskripsi" style="display: block; font-weight: bold;">Deskripsi:</label>
-        <textarea name="deskripsi" id="deskripsi" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-    </div>
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="card shadow p-4">
+            <form action="/event/store" method="POST">
+                <div class="form-group mb-3">
+                    <label for="nama_acara">Nama Acara</label>
+                    <input type="text" name="nama_acara" id="nama_acara" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea name="deskripsi" id="deskripsi" class="form-control" required></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="waktu">Waktu</label>
+                    <input type="time" name="waktu" id="waktu" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" name="lokasi" id="lokasi" class="form-control" required>
+                </div>
 
-    <div style="margin-bottom: 15px;">
-        <label for="tanggal" style="display: block; font-weight: bold;">Tanggal:</label>
-        <input type="date" name="tanggal" id="tanggal" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+                <div class="form-group mb-3">
+                    <label for="id_org" class="form-label">Pilih Penanggung Jawab</label>
+                    <select name="id_org" class="form-control" required>
+                        <option value="">Pilih Organizers</option>
+                        <?php foreach ($org as $index => $or): ?>
+                            <option value="<?= htmlspecialchars($or['id_org']); ?>">
+                                <?= htmlspecialchars($or['nama']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-    <div style="margin-bottom: 15px;">
-        <label for="waktu" style="display: block; font-weight: bold;">Waktu:</label>
-        <input type="time" name="waktu" id="waktu" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-save"></i> Simpan</button>
+                    <a href="/event/index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Kembali ke Daftar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 
-    <div style="margin-bottom: 15px;">
-        <label for="lokasi" style="display: block; font-weight: bold;">Lokasi:</label>
-        <input type="text" name="lokasi" id="lokasi" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+    <!-- Vendor JS Files -->
+    <script src="/public/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/public/assets/vendor/aos/aos.js"></script>
+    <script src="/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/public/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/assets/js/main.js"></script>
 
-    <div style="margin-bottom: 15px;">
-        <label for="id_org" style="display: block; font-weight: bold;">ID Organizer:</label>
-        <input type="int" name="id_org" id="id_org" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+</body>
 
-    <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px;">Simpan</button>
-</form>
+</html>

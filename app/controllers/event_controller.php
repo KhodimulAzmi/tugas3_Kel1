@@ -1,12 +1,16 @@
 <?php
 // app/controllers/EventController.php
 require_once '../app/models/events_model.php';
+require_once '../app/models/organizers_model.php';
 
 class EventController {
     private $EventsModel;
+    private $organizersModel;
 
     public function __construct() {
         $this->EventsModel = new EventsModel();
+        $this->organizersModel = new OrganizersModel();
+
     }
 
     // Menampilkan daftar event
@@ -18,6 +22,7 @@ class EventController {
 
     // Menampilkan form untuk menambah acara baru
     public function create() {
+        $org = $this->organizersModel->getAllOrganizers();
         require_once '../app/views/event/create.php';
     }
 
@@ -42,6 +47,7 @@ class EventController {
     public function edit($id_events) {
         // Mengambil data acara berdasarkan ID
         $event = $this->EventsModel->find($id_events); 
+        $org = $this->organizersModel->getAllOrganizers();
     
         // Mengirimkan data ke view
         require_once __DIR__ . '/../views/event/edit.php';
