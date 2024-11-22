@@ -1,13 +1,16 @@
 <?php
 require_once '../app/models/Peserta.php';
+require_once '../app/models/tiketModels.php';
 
 class AttendeesController
 {
     private $pesertaModel;
+    private $ticketModel;
 
     public function __construct()
     {
         $this->pesertaModel = new Peserta();
+        $this->ticketModel = new TicketModel();
     }
 
     // Method untuk menampilkan halaman daftar peserta
@@ -21,6 +24,7 @@ class AttendeesController
     // Method untuk menampilkan form tambah peserta
     public function create()
     {
+        $tiket = $this->ticketModel->getAllTickets();
         require_once '../app/views/peserta/create.php';
     }
 
@@ -48,6 +52,7 @@ class AttendeesController
     // Show the edit form with the user data
     public function edit($id_att)
     {
+        $tiket = $this->ticketModel->getAllTickets();
         $attendee = $this->pesertaModel->find($id_att); // Assume find() gets user by ID
         require_once __DIR__ . '/../views/peserta/edit.php';
     }
