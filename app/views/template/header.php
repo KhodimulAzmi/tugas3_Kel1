@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicons -->
-    <link href="assets/img/tiket.png" rel="icon">
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -29,8 +26,6 @@
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
         <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/tiket.png" alt="tiket">
         <h1 class="sitename">Event Management</h1>
         <span>.</span>
         </a>
