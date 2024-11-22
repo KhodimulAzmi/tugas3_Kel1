@@ -1,116 +1,83 @@
-<!-- app/views/event/edit.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
-    <style>
-        /* Styling untuk form */
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-family: Arial, sans-serif;
-        }
 
-        form div {
-            margin-bottom: 15px;
-        }
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007BFF;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <!-- Bootstrap & CSS -->
+    <link rel="stylesheet" href="/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/public/assets/css/main.css" rel="stylesheet">
+    <link href="/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/public/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/public/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/public/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Edit Event</h2>
 
-    <!-- Form untuk edit event -->
-    <form action="/event/update/<?php echo $event['id_events']; ?>" method="POST">
+ 
+  <div class="text-center">
+    <div class="container">
+      <h1 class="mb-4">Edit Event</h1>
+    </div>
+</div>
 
-
-        <!-- Nama Acara -->
-        <div>
-            <label for="nama_acara">Nama Acara:</label>
-            <input type="text" id="nama_acara" name="nama_acara" value="<?php echo htmlspecialchars($event['nama_acara'] ?? ''); ?>" required>
+  <main class="container my-5">
+    <div class="card shadow p-4">
+      <form action="/event/update/<?php echo $event['id_events']; ?>" method="POST">
+        <div class="form-group mb-3">
+          <label for="nama_acara">Nama Acara</label>
+          <input type="text" id="nama_acara" name="nama_acara" class="form-control" value="<?php echo htmlspecialchars($event['nama_acara'] ?? ''); ?>" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" class="form-control" required><?php echo htmlspecialchars($event['deskripsi'] ?? ''); ?></textarea>
+        </div>
+        <div class="form-group mb-3">
+          <label for="tanggal">Tanggal</label>
+          <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo htmlspecialchars($event['tanggal'] ?? ''); ?>" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="waktu">Waktu</label>
+          <input type="time" id="waktu" name="waktu" class="form-control" value="<?php echo htmlspecialchars($event['waktu'] ?? ''); ?>" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="lokasi">Lokasi</label>
+          <input type="text" id="lokasi" name="lokasi" class="form-control" value="<?php echo htmlspecialchars($event['lokasi'] ?? ''); ?>" required>
+        </div>
+        <div class="form-group mb-3">
+        <label for="id_org" class="form-label">Pilih Penanggung Jawab</label>
+                <select name="id_org" class="form-control" required>
+        <option value="">Pilih Organizers</option>
+        <?php foreach ($org as $index => $or): ?>
+        <option value="<?= htmlspecialchars($or['id_org']); ?>" <?= ($or['id_org'] == $event['id_org']) ? 'selected' : ''; ?>>
+            <?= htmlspecialchars($or['nama']); ?>
+        </option>
+    <?php endforeach; ?>
+</select>
         </div>
 
-        <!-- Deskripsi -->
-        <div>
-            <label for="deskripsi">Deskripsi:</label>
-            <textarea id="deskripsi" name="deskripsi" required><?php echo htmlspecialchars($event['deskripsi'] ?? ''); ?></textarea>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-danger"><i class="bi bi-save"></i> Update</button>
+          <a href="/event/index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
         </div>
+      </form>
+    </div>
+  </main>
 
-        <!-- Tanggal -->
-        <div>
-            <label for="tanggal">Tanggal:</label>
-            <input type="date" id="tanggal" name="tanggal" value="<?php echo htmlspecialchars($event['tanggal'] ?? ''); ?>" required>
-        </div>
-
-        <!-- Waktu -->
-        <div>
-            <label for="waktu">Waktu:</label>
-            <input type="time" id="waktu" name="waktu" value="<?php echo htmlspecialchars($event['waktu'] ?? ''); ?>" required>
-        </div>
-
-        <!-- Lokasi -->
-        <div>
-            <label for="lokasi">Lokasi:</label>
-            <input type="text" id="lokasi" name="lokasi" value="<?php echo htmlspecialchars($event['lokasi'] ?? ''); ?>" required>
-        </div>
-
-                <!-- Penanggung Jawab -->
-                <div>
-            <label for="penanggung jawab">Penanggung Jawab:</label>
-            <input type="number" id="id_org" name="id_org" value="<?php echo htmlspecialchars($event['id_org'] ?? ''); ?>" required>
-        </div>
-
-        <!-- Tombol Submit -->
-        <button type="submit">Update</button>
-    </form>
-
-    <!-- Link untuk kembali ke daftar acara -->
-    <a href="/event/index">Back to List</a>
+  <!-- Vendor JS Files -->
+  <script src="/public/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/public/assets/vendor/aos/aos.js"></script>
+  <script src="/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/public/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/public/assets/js/main.js"></script>
 
 </body>
 </html>

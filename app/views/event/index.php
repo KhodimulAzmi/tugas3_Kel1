@@ -22,14 +22,14 @@
 
 </head>
 <body>
-<header class="text-center">
+<div class="text-center">
     <div class="container">
       <h1 class="mb-4">Daftar Events</h1>
     </div>
-  </header>
-  <main class="container my-5">
-      <div class="text-end mb-3">
-        <a href="/event/create">Tambah Events Baru</a>
+</div>
+    <main class="container my-5">
+    <div class="text-end mb-3">
+      <a href="/event/create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Tambah Event</a>
     </div>
     <table class="table-custom">
       <thead>
@@ -54,16 +54,16 @@
           <td><?= htmlspecialchars($event['tanggal']); ?></td>
           <td><?= htmlspecialchars($event['waktu']); ?></td>
           <td><?= htmlspecialchars($event['lokasi']); ?></td>
-          <td><?= htmlspecialchars($event['id_org']); ?></td>
+          <td><?= htmlspecialchars($event['nama']); ?></td>
           
           
 
           <td>
-                        <a href="/events/edit/<?php echo $tiket['id_events']; ?>" class="btn btn-warning btn-sm">
+                        <a href="/event/edit/<?php echo $event['id_events']; ?>" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
                 
-                        <a href="/events/delete/<?php echo $tiket['id_events']; ?>" class="btn btn-danger btn-sm">
+                        <a href="/event/delete/<?php echo $event['id_events']; ?>" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i> Delete
                         </a>
                     </td>
