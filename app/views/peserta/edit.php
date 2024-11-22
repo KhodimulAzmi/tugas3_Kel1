@@ -49,7 +49,7 @@
                     <select name="id_tiket" class="form-control" required>
                         <option value="<?php echo $attendee['id_tiket'] ?>">Pilih Tiket</option>
                         <?php foreach ($tiket as $index => $tkt): ?>
-                            <option value="<?= htmlspecialchars($tkt['id_tiket']); ?>" <?= ($tkt['id_tiket'] == $tkt['id_tiket']) ? 'selected' : ''; ?>>
+                            <option value="<?= htmlspecialchars($tkt['id_tiket']); ?>" <?= ($tkt['id_tiket'] == $attendee['id_tiket']) ? 'selected' : ''; ?>>
                                 <?= htmlspecialchars($tkt['id_tiket']); ?>
                             </option><br></br>
                         <?php endforeach; ?>
